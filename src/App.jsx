@@ -1,6 +1,7 @@
 import { useState } from "react";
 import viteLogo from "/vite.svg";
 import "./App.css";
+import Pregunta from "./components/Pregunta";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -11,7 +12,8 @@ function App() {
         <img src={viteLogo} width={"100px"} />
       </a>
       <div>
-        <h1>Pregunta</h1>
+        <h1>Bienvenido a Encuesfera</h1>
+        <Pregunta />
         <div>
           <div id="respuestas">
             <button onClick={() => setCount((count) => count + 1)}>
