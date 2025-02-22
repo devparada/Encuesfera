@@ -5,12 +5,12 @@ import Opciones from "./components/Opciones";
 
 function App() {
   return (
-    <div>
+    <div className="inline">
       <a href="https://encuesfera.vercel.app" target="_blank">
-        <img src={viteLogo} width={"100px"} />
+        <img src={viteLogo} alt="logo" width={"100px"} className="inline" />
       </a>
-      <div>
-        <h1>Bienvenido a Encuesfera</h1>
+      <div className="p-1.5">
+        <h1 className="mt-2 mb-2">Bienvenido a Encuesfera</h1>
         <Pregunta />
         <Opciones />
       </div>

@@ -9,8 +9,8 @@ function Pregunta() {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div>
-      <h2>{data.textoPregunta}</h2>
+    <div className="mt-3 mb-4">
+      <h2 className="font-bold text-2xl">{data.textoPregunta}</h2>
     </div>
   );
 }

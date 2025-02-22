@@ -46,12 +46,13 @@ function OpcionesBotones() {
   }
 
   return (
-    <div>
-      <h2>Elige una opción:</h2>
+    <div className="mt-3 mb-3">
+      <h2 className="font-bold mb-2">Elige una opción:</h2>
       {opciones?.length > 0 ? (
         opciones.map((opcion) => (
           <button
             key={opcion.idOpcion}
+            className="mt-3 mb-3 mr-1"
             onClick={() => enviarOpcion(opcion.idOpcion)}
           >
             {opcion.textoOpcion}
