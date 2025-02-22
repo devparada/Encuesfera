@@ -4,7 +4,6 @@
   text-align: center;
 }
 
-#respuestas button {
+.botonesOpcion {
   margin-right: 1em;
-  padding: 1em;
 }

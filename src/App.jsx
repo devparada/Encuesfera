@@ -1,11 +1,9 @@
-import { useState } from "react";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import Pregunta from "./components/Pregunta";
+import Opciones from "./components/Opciones";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <div>
       <a href="https://encuesfera.vercel.app" target="_blank">
@@ -14,16 +12,7 @@ function App() {
       <div>
         <h1>Bienvenido a Encuesfera</h1>
         <Pregunta />
-        <div>
-          <div id="respuestas">
-            <button onClick={() => setCount((count) => count + 1)}>
-              Respuesta - {count}
-            </button>
-            <button onClick={() => setCount((count) => count + 1)}>
-              Respuesta 2 - {count}
-            </button>
-          </div>
-        </div>
+        <Opciones />
       </div>
     </div>
   );
