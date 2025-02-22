@@ -6,11 +6,12 @@ function OpcionesBotones() {
     import.meta.env.VITE_API_BASE + "/pregunta/dia/id"
   );
 
-  // Comprueba si el id de la pregunta es null y si lo es se cambia por un valor
-  const preguntaId = idPregunta?.idPregunta || 1;
-  const { data: opciones } = useFetch(
-    import.meta.env.VITE_API_BASE + "/opciones/" + preguntaId
+  // Comprueba si el id de la pregunta es null
+  const { data: opciones } = useFetch(idPregunta?.idPregunta ?
+    import.meta.env.VITE_API_BASE + "/opciones/" + idPregunta.idPregunta : null
   );
+
+  const opcionesData = Array.isArray(opciones) ? opciones : [];
 
   // Obtiene la IP al hacer una petición GET a esta URL
   async function obtenerIP() {
@@ -48,8 +49,8 @@ function OpcionesBotones() {
   return (
     <div className="mt-3 mb-3">
       <h2 className="font-bold mb-2">Elige una opción:</h2>
-      {opciones?.length > 0 ? (
-        opciones.map((opcion) => (
+      {opcionesData.length > 0 ? (
+        opcionesData.map((opcion) => (
           <button
             key={opcion.idOpcion}
             className="mt-3 mb-3 mr-1"

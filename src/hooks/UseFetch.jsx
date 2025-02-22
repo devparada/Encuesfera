@@ -9,7 +9,7 @@ export function useFetch(url) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(url);
+        const response = url ? await axios.get(url) : null;
         setData(response.data);
       } catch (err) {
         setError(err);
