@@ -5,8 +5,8 @@ function Pregunta() {
     import.meta.env.VITE_API_BASE + "/pregunta/dia"
   );
 
-  if (loading) return <div>Cargando datos...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  if (loading) return <div>Cargando pregunta...</div>;
+  if (error) return <div></div>;
 
   return (
     <div className="mt-3 mb-4">

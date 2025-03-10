@@ -31,7 +31,7 @@ function OpcionesBotones() {
       if (!idPregunta || !idPregunta.idPregunta) return;
 
       await axios.post(
-        import.meta.env.VITE_API_BASE + "/enviarOpcion",
+        import.meta.env.VITE_API_BASE + "/respuestas/enviarOpcion",
         { option, ip: clientIp, idPregunta: idPregunta.idPregunta },
         {
           withCredentials: true,
@@ -54,7 +54,7 @@ function OpcionesBotones() {
           <button
             key={opcion.idOpcion}
             className="mt-3 mb-3 mr-1"
-            onClick={() => enviarOpcion(opcion.idOpcion)}
+            onClick={() => enviarOpcion(opcion)}
           >
             {opcion.textoOpcion}
           </button>

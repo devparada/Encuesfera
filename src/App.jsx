@@ -2,6 +2,7 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import Pregunta from "./components/Pregunta";
 import Opciones from "./components/Opciones";
+import Respuestas from "./components/Respuestas";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <h1 className="mt-2 mb-2">Bienvenido a Encuesfera</h1>
         <Pregunta />
         <Opciones />
+        <Respuestas />
       </div>
     </div>
   );
