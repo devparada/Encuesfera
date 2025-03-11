@@ -1,14 +1,18 @@
 import axios from "axios";
 import { useFetch } from "../hooks/UseFetch";
+import PropTypes from "prop-types";
 
-function OpcionesBotones() {
+// onVoto es una función de Encuesta pasada como parámetro
+function Opciones({ onVoto }) {
   const { data: idPregunta } = useFetch(
     import.meta.env.VITE_API_BASE + "/pregunta/dia/id"
   );
 
   // Comprueba si el id de la pregunta es null
-  const { data: opciones } = useFetch(idPregunta?.idPregunta ?
-    import.meta.env.VITE_API_BASE + "/opciones/" + idPregunta.idPregunta : null
+  const { data: opciones } = useFetch(
+    idPregunta?.idPregunta
+      ? import.meta.env.VITE_API_BASE + "/opciones/" + idPregunta.idPregunta
+      : null
   );
 
   const opcionesData = Array.isArray(opciones) ? opciones : [];
@@ -46,6 +50,12 @@ function OpcionesBotones() {
     }
   }
 
+  // Función que se llama al hacer click a una de las opciones
+  const clickOpcion = async (opcion) => {
+    await enviarOpcion(opcion);
+    onVoto();
+  };
+
   return (
     <div className="mt-3 mb-3">
       <h2 className="font-bold mb-2">Elige una opción:</h2>
@@ -54,7 +64,7 @@ function OpcionesBotones() {
           <button
             key={opcion.idOpcion}
             className="mt-3 mb-3 mr-1"
-            onClick={() => enviarOpcion(opcion)}
+            onClick={() => clickOpcion(opcion)}
           >
             {opcion.textoOpcion}
           </button>
@@ -66,4 +76,9 @@ function OpcionesBotones() {
   );
 }
 
-export default OpcionesBotones;
+// Define que onVoto es una función
+Opciones.propTypes = {
+  onVoto: PropTypes.func,
+};
+
+export default Opciones;

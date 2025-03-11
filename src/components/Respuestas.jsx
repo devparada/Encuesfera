@@ -1,5 +1,7 @@
 import { useFetch } from "../hooks/UseFetch";
+import { useEffect } from "react";
 import { BarProgress } from "./BarProgress";
+import PropTypes from "prop-types";
 
 // Calcular el porcentaje para una opción
 function calcularPorcentaje(opcionVotos, totalVotos) {
@@ -7,25 +9,37 @@ function calcularPorcentaje(opcionVotos, totalVotos) {
   return Math.round((opcionVotos / totalVotos) * 100);
 }
 
-const Respuestas = () => {
+// refresh es una función de Encuesta pasada como parámetro
+const Respuestas = ({ refresh }) => {
   const { data: idPregunta } = useFetch(
     import.meta.env.VITE_API_BASE + "/pregunta/dia/id",
+    { withRefresh: true }
   );
 
-  const { data: opciones } = useFetch(
+  const { data: opciones, refetch: refetchOpciones } = useFetch(
     idPregunta?.idPregunta
       ? import.meta.env.VITE_API_BASE + "/respuestas/" + idPregunta.idPregunta
       : null,
+    { withRefresh: true }
   );
 
-  const { data: totalRespuestas } = useFetch(
+  const { data: totalRespuestas, refetch: refetchTotal } = useFetch(
     idPregunta?.idPregunta
       ? import.meta.env.VITE_API_BASE +
           "/respuestas/" +
           idPregunta.idPregunta +
           "/contar"
-      : null
+      : null,
+    { withRefresh: true }
   );
+
+  // Cuando el id de la pregunta cambia, se actualiza el total de respuestas
+  useEffect(() => {
+    if (idPregunta?.idPregunta) {
+      refetchOpciones();
+      refetchTotal();
+    }
+  }, [refresh, idPregunta?.idPregunta, refetchTotal, refetchOpciones]);
 
   // Asegurarnos de que totalRespuestas tenga un valor numérico adecuado
   const totalRespuestasCount = totalRespuestas?.[0]?.totalRespuestas || 0;
@@ -39,7 +53,10 @@ const Respuestas = () => {
             totalRespuestasCount
           );
           return (
-            <div key={`${opcion.idOpcion}-${indice}`} className="space-y-4 mb-6">
+            <div
+              key={`${opcion.idOpcion}-${indice}`}
+              className="space-y-4 mb-6"
+            >
               <div className="flex justify-between mb-1">
                 <span className="text-sm text-gray-300">
                   {opcion.textoOpcion}
@@ -53,6 +70,11 @@ const Respuestas = () => {
       </div>
     );
   }
+};
+
+// Define que refresh es una función
+Respuestas.propTypes = {
+  refresh: PropTypes.func,
 };
 
 export default Respuestas;

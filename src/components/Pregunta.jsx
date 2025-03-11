@@ -3,7 +3,7 @@ import { useFetch } from "../hooks/UseFetch";
 function Pregunta() {
   const { data, loading, error } = useFetch(
     import.meta.env.VITE_API_BASE + "/pregunta/dia"
-  );
+    );
 
   if (loading) return <div>Cargando pregunta...</div>;
   if (error) return <div></div>;

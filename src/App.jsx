@@ -1,8 +1,7 @@
 import logo from "/logo.png";
 import "./App.css";
 import Pregunta from "./components/Pregunta";
-import Opciones from "./components/Opciones";
-import Respuestas from "./components/Respuestas";
+import Encuesta from "./components/Encuesta";
 
 function App() {
   return (
@@ -13,8 +12,7 @@ function App() {
       <div className="p-1.5">
         <h1 className="mt-2 mb-2">Bienvenido a Encuesfera</h1>
         <Pregunta />
-        <Opciones />
-        <Respuestas />
+        <Encuesta />
       </div>
     </div>
   );
